@@ -24,7 +24,7 @@ class EmpleadoBusiness: IEmpleadoBusiness{
             throw BusinessException(e.message)
         }
     }
-
+    @Throws(BusinessException::class, NotFoundException::class)
     override fun getEmpleadoById(idEmpleado: Long): empleado {
         val opt: Optional<empleado>
         try{
@@ -41,6 +41,7 @@ class EmpleadoBusiness: IEmpleadoBusiness{
         return opt.get()
     }
 
+    @Throws(BusinessException::class)
     override fun saveEmpleado(empleado: empleado): empleado {
         try{
             validarEspacios(empleado)
@@ -53,7 +54,7 @@ class EmpleadoBusiness: IEmpleadoBusiness{
             throw BusinessException(e.message)
         }
     }
-
+    @Throws(BusinessException::class, NotFoundException::class)
     override fun removeEmpleado(idEmpleado: Long) {
         val opt: Optional<empleado>
         try{
@@ -62,7 +63,7 @@ class EmpleadoBusiness: IEmpleadoBusiness{
             throw BusinessException(e.message)
         }
         if(!opt.isPresent){
-            throw NotFoundException("No se encontró la audiencia $idEmpleado")
+            throw NotFoundException("No se encontró el empleado $idEmpleado")
         }
         else{
             try{
@@ -72,7 +73,7 @@ class EmpleadoBusiness: IEmpleadoBusiness{
             }
         }
     }
-
+    @Throws(BusinessException::class, NotFoundException::class)
     override fun getEmpleadoByDniempleado(dni: String): empleado {
         val opt: Optional<empleado>
         try{
@@ -86,6 +87,7 @@ class EmpleadoBusiness: IEmpleadoBusiness{
         return opt.get()
     }
 
+    @Throws(BusinessException::class, NotFoundException::class)
     override fun updateEmpleado(empleado: empleado): empleado {
         val opt: Optional<empleado>
         try{
@@ -109,9 +111,9 @@ class EmpleadoBusiness: IEmpleadoBusiness{
             }
         }
         return opt.get()
-
     }
 
+    @Throws(BusinessException::class, NotFoundException::class)
     override fun getBycontraseña(usuario: String, contraseña: String): empleado {
         val opt: Optional<empleado>
         try{

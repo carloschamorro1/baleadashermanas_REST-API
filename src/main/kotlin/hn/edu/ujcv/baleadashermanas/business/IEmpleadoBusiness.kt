@@ -1,7 +1,6 @@
 package hn.edu.ujcv.baleadashermanas.business
 
 import hn.edu.ujcv.baleadashermanas.model.empleado
-import java.util.*
 
 interface IEmpleadoBusiness {
     fun getEmpleado():List<empleado>

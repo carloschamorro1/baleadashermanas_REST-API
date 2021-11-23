@@ -3,7 +3,6 @@ package hn.edu.ujcv.baleadashermanas.business
 import hn.edu.ujcv.baleadashermanas.dao.InventarioRepository
 import hn.edu.ujcv.baleadashermanas.exceptions.BusinessException
 import hn.edu.ujcv.baleadashermanas.exceptions.NotFoundException
-import hn.edu.ujcv.baleadashermanas.model.cliente
 import hn.edu.ujcv.baleadashermanas.model.inventario
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
@@ -40,6 +39,7 @@ class InventarioBusiness : IInventarioBusiness {
         }
         return opt.get()
     }
+
     @Throws(BusinessException::class)
     override fun saveProducto(inventario: inventario): inventario {
         try{

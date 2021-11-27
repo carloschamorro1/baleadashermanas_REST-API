@@ -88,6 +88,20 @@ class EmpleadoBusiness: IEmpleadoBusiness{
     }
 
     @Throws(BusinessException::class, NotFoundException::class)
+    override fun getBycontraseña(usuario: String, contraseña: String): empleado {
+        val opt: Optional<empleado>
+        try{
+            opt = empleadoRepository!!.findByusuarioAndcontraseña(usuario, contraseña)
+        }catch (e:Exception){
+            throw BusinessException(e.message)
+        }
+        if(!opt.isPresent){
+            throw NotFoundException("No se encontro el usuario o contraseña")
+        }
+        return opt.get()
+    }
+
+    @Throws(BusinessException::class, NotFoundException::class)
     override fun updateEmpleado(empleado: empleado): empleado {
         val opt: Optional<empleado>
         try{
@@ -113,19 +127,7 @@ class EmpleadoBusiness: IEmpleadoBusiness{
         return opt.get()
     }
 
-    @Throws(BusinessException::class, NotFoundException::class)
-    override fun getBycontraseña(usuario: String, contraseña: String): empleado {
-        val opt: Optional<empleado>
-        try{
-            opt = empleadoRepository!!.findByusuarioAndcontraseña(usuario, contraseña)
-        }catch (e:Exception){
-            throw BusinessException(e.message)
-        }
-        if(!opt.isPresent){
-            throw NotFoundException("No se encontro el usuario o contraseña")
-        }
-        return opt.get()
-    }
+
 
     // Validaciones
 

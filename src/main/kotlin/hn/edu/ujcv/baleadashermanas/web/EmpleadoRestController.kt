@@ -2,6 +2,7 @@ package hn.edu.ujcv.baleadashermanas.web
 
 import hn.edu.ujcv.baleadashermanas.business.IEmpleadoBusiness
 import hn.edu.ujcv.baleadashermanas.exceptions.BusinessException
+import hn.edu.ujcv.baleadashermanas.exceptions.NotFoundException
 import hn.edu.ujcv.baleadashermanas.model.empleado
 import hn.edu.ujcv.baleadashermanas.utils.Constants
 import hn.edu.ujcv.baleadashermanas.utils.RestApiError
@@ -86,16 +87,16 @@ class EmpleadoRestController {
         }
     }
 
-    @GetMapping("login/{usuario}/{contraseña}")
-    fun login(@PathVariable("usuario")usuario: String, @PathVariable("contraseña")contraseña: String):ResponseEntity<Any>{
+    @GetMapping("/login/{usuario}/{pass}")
+    fun login(@PathVariable("usuario")usuario: String, @PathVariable("pass")contraseña: String): ResponseEntity<empleado>{
         return try{
-            empleadoBusiness!!.getBycontraseña(usuario,contraseña)
-            ResponseEntity(HttpStatus.OK)
+            ResponseEntity(empleadoBusiness!!.getBycontraseña(usuario,contraseña),HttpStatus.OK)
         }catch (e:BusinessException){
             ResponseEntity(HttpStatus.INTERNAL_SERVER_ERROR)
         }
-        catch (e:BusinessException){
+        catch (e:NotFoundException){
             ResponseEntity(HttpStatus.NOT_FOUND)
         }
     }
+
 }

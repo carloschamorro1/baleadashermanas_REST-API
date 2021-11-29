@@ -39,7 +39,7 @@ class ClienteRestController {
     }
 
     @GetMapping("/dni/{dni}")
-    fun loadByDniempleado(@PathVariable("dni") dni:String):ResponseEntity<cliente>{
+    fun loadByDnicliente(@PathVariable("dni") dni:String):ResponseEntity<cliente>{
         return try{
             ResponseEntity(clienteBusiness!!.getClienteByDniempleado(dni),HttpStatus.OK)
         }catch (e: BusinessException){
@@ -66,8 +66,7 @@ class ClienteRestController {
     @PutMapping("")
     fun update(@RequestBody cliente: cliente):ResponseEntity<Any>{
         return try{
-            clienteBusiness!!.updateCliente(cliente)
-            ResponseEntity(HttpStatus.OK)
+            ResponseEntity(clienteBusiness!!.updateCliente(cliente),HttpStatus.OK)
         }catch (e:BusinessException){
             ResponseEntity(HttpStatus.INTERNAL_SERVER_ERROR)
         }

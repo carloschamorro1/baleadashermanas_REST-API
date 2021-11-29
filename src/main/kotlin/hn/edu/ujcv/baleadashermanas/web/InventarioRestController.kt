@@ -66,8 +66,7 @@ class InventarioRestController {
     @PutMapping("")
     fun update(@RequestBody inventario: inventario):ResponseEntity<Any>{
         return try{
-            inventarioBusiness!!.updateProducto(inventario)
-            ResponseEntity(HttpStatus.OK)
+            ResponseEntity(inventarioBusiness!!.updateProducto(inventario),HttpStatus.OK)
         }catch (e:BusinessException){
             ResponseEntity(HttpStatus.INTERNAL_SERVER_ERROR)
         }

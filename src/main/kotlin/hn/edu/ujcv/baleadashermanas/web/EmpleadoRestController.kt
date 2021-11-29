@@ -65,8 +65,7 @@ class EmpleadoRestController {
     @PutMapping("")
     fun update(@RequestBody empleado: empleado):ResponseEntity<Any>{
         return try{
-            empleadoBusiness!!.updateEmpleado(empleado)
-            ResponseEntity(HttpStatus.OK)
+            ResponseEntity(empleadoBusiness!!.updateEmpleado(empleado),HttpStatus.OK)
         }catch (e:BusinessException){
             ResponseEntity(HttpStatus.INTERNAL_SERVER_ERROR)
         }
@@ -98,5 +97,7 @@ class EmpleadoRestController {
             ResponseEntity(HttpStatus.NOT_FOUND)
         }
     }
+
+
 
 }

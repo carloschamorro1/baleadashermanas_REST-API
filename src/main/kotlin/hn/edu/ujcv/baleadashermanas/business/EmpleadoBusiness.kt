@@ -119,6 +119,14 @@ class EmpleadoBusiness: IEmpleadoBusiness{
                 existeUsuario(empleado.usuario)
                 existeEmpleado(empleado.dniempleado)
                 validarLongitudTelefono(empleado.telefono_empleado)
+                if(empleado.contraseña.isEmpty()){
+                     empleadoRepository!!.updateEmpleado(
+                        empleado.primer_nombre_empleado,empleado.segundo_nombre_empleado,empleado.primer_apellido_empleado,
+                        empleado.segundo_apellido_empleado,empleado.telefono_empleado,empleado.email_empleado,empleado.dniempleado,
+                        empleado.usuario,empleado.dniempleado
+                    )
+                    return empleadoRepository!!.getById(empleado.idempleado)
+                }
                 return empleadoRepository!!.save(empleado)
             }catch(e: java.lang.Exception){
                 throw BusinessException(e.message)
